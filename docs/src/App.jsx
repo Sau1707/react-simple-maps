@@ -4,6 +4,7 @@ import {
   Geographies,
   Geography,
   Marker,
+  ZoomableGroup,
 } from "react-simple-maps";
 
 const geoUrl =
@@ -27,6 +28,12 @@ const examples = [
     title: "Basic markers",
     description:
       "This example shows how to add basic markers to a map. To see an example of how to add custom SVG markers, see the custom markers example.",
+  },
+  {
+    href: "/zoom",
+    title: "Map with zoom and pan",
+    description:
+      "The map shows how to use the <ZoomableGroup /> component to render a map with pinch zoom and pan enabled.",
   },
 ];
 
@@ -175,6 +182,38 @@ function MarkersPage() {
   );
 }
 
+function ZoomPage() {
+  return (
+    <main>
+      <a className="back-link" href="/">
+        ← Back to examples
+      </a>
+      <h1>Map with zoom and pan</h1>
+      <p>
+        The map shows how to use the react-simple-maps <code>{"<ZoomableGroup />"}</code>
+        {" "}
+        component to render a map with pinch zoom and pan enabled.
+      </p>
+      <ComposableMap projectionConfig={{ scale: 140 }}>
+        <ZoomableGroup>
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill="#f5f4f6"
+                  stroke="#d6d6da"
+                />
+              ))
+            }
+          </Geographies>
+        </ZoomableGroup>
+      </ComposableMap>
+    </main>
+  );
+}
+
 function App() {
   const pathname = window.location.pathname;
 
@@ -188,6 +227,10 @@ function App() {
 
   if (pathname === "/markers") {
     return <MarkersPage />;
+  }
+
+  if (pathname === "/zoom") {
+    return <ZoomPage />;
   }
 
   return <LandingPage />;
