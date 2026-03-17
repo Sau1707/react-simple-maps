@@ -7,6 +7,7 @@ import {
   Geography,
   Graticule,
   Marker,
+  ZoomableGroup,
 } from "react-simple-maps";
 
 const geoUrl =
@@ -42,6 +43,12 @@ const examples = [
     title: "Mapchart with texture",
     description:
       "This map shows how to use react-simple-maps to add textures on the map. This example uses PatternLines from VX to create a line texture.",
+  },
+  {
+    href: "#/zoom",
+    title: "Map with zoom and pan",
+    description:
+      "The above map shows how to use the <ZoomableGroup /> component to render a map with pinch zoom and pan enabled.",
   },
 ];
 
@@ -271,6 +278,40 @@ function TexturePage() {
   );
 }
 
+function ZoomPage() {
+  return (
+    <main>
+      <a className="back-link" href="#/">
+        ← Back to examples
+      </a>
+      <h1>Map with zoom and pan</h1>
+      <p>
+        The above map shows how to use the
+        {" "}
+        <code>{"<ZoomableGroup />"}</code>
+        {" "}
+        component to render a map with pinch zoom and pan enabled.
+      </p>
+      <ComposableMap projectionConfig={{ scale: 140 }}>
+        <ZoomableGroup>
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill="#f5f4f6"
+                  stroke="#d6d6da"
+                />
+              ))
+            }
+          </Geographies>
+        </ZoomableGroup>
+      </ComposableMap>
+    </main>
+  );
+}
+
 function App() {
   const [route, setRoute] = useState(() => window.location.hash.replace(/^#/, "") || "/");
 
@@ -301,6 +342,10 @@ function App() {
 
   if (route === "/texture") {
     return <TexturePage />;
+  }
+
+  if (route === "/zoom") {
+    return <ZoomPage />;
   }
 
   return <LandingPage />;
