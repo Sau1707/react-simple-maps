@@ -3,6 +3,7 @@ import {
   ComposableMap,
   Geographies,
   Geography,
+  Marker,
 } from "react-simple-maps";
 
 const geoUrl =
@@ -14,6 +15,12 @@ const examples = [
     title: "Basic annotation",
     description:
       "This example shows how to add a basic annotation using the react-simple-maps <Annotation /> component.",
+  },
+  {
+    href: "/markers",
+    title: "Basic markers",
+    description:
+      "This example shows how to add basic markers to a map. To see an example of how to add custom SVG markers, see the custom markers example.",
   },
 ];
 
@@ -80,11 +87,62 @@ function AnnotationPage() {
   );
 }
 
+function MarkersPage() {
+  return (
+    <main>
+      <a className="back-link" href="/">
+        ← Back to examples
+      </a>
+      <h1>Basic markers</h1>
+      <p>
+        This example shows how to add basic markers to a map. To see an example
+        of how to add custom SVG markers, see the custom markers example.
+      </p>
+      <ComposableMap projectionConfig={{ scale: 140 }}>
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="#f5f4f6"
+                stroke="#d6d6da"
+              />
+            ))
+          }
+        </Geographies>
+        <Marker coordinates={[-74.006, 40.7128]}>
+          <circle r={6} fill="#4f46e5" stroke="#fff" strokeWidth={2} />
+          <text textAnchor="middle" y={-12} style={{ fill: "#312e81", fontSize: "12px" }}>
+            New York
+          </text>
+        </Marker>
+        <Marker coordinates={[2.3522, 48.8566]}>
+          <circle r={6} fill="#4f46e5" stroke="#fff" strokeWidth={2} />
+          <text textAnchor="middle" y={-12} style={{ fill: "#312e81", fontSize: "12px" }}>
+            Paris
+          </text>
+        </Marker>
+        <Marker coordinates={[139.6917, 35.6895]}>
+          <circle r={6} fill="#4f46e5" stroke="#fff" strokeWidth={2} />
+          <text textAnchor="middle" y={-12} style={{ fill: "#312e81", fontSize: "12px" }}>
+            Tokyo
+          </text>
+        </Marker>
+      </ComposableMap>
+    </main>
+  );
+}
+
 function App() {
   const pathname = window.location.pathname;
 
   if (pathname === "/annotation") {
     return <AnnotationPage />;
+  }
+
+  if (pathname === "/markers") {
+    return <MarkersPage />;
   }
 
   return <LandingPage />;
