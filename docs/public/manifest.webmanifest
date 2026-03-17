@@ -1,0 +1,9 @@
+{
+  "name": "react-simple-maps docs examples",
+  "short_name": "RSM Docs",
+  "description": "Example pages for the react-simple-maps package.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111827"
+}

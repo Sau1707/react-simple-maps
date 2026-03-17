@@ -3,3 +3,6 @@
 .DS_Store
 node_modules
 dist
+docs/node_modules
+docs/dist
+docs/.vite
