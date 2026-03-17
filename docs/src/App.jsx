@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Annotation,
   ComposableMap,
@@ -12,25 +13,25 @@ const geoUrl =
 
 const examples = [
   {
-    href: "/world",
+    href: "#/world",
     title: "Basic world map",
     description:
       "This example illustrates the easiest way to display a world map based on a custom topojson file. You can replace the map file with any valid topojson file.",
   },
   {
-    href: "/annotation",
+    href: "#/annotation",
     title: "Basic annotation",
     description:
       "This example shows how to add a basic annotation using the react-simple-maps <Annotation /> component.",
   },
   {
-    href: "/markers",
+    href: "#/markers",
     title: "Basic markers",
     description:
       "This example shows how to add basic markers to a map. To see an example of how to add custom SVG markers, see the custom markers example.",
   },
   {
-    href: "/graticule",
+    href: "#/graticule",
     title: "Europe map with graticule",
     description:
       "This example shows how to use react-simple-maps to make a map of Europe with graticule. It uses the built-in geoAzimuthalEqualArea projection with custom rotation params.",
@@ -57,7 +58,7 @@ function LandingPage() {
 function AnnotationPage() {
   return (
     <main>
-      <a className="back-link" href="/">
+      <a className="back-link" href="#/">
         ← Back to examples
       </a>
       <h1>Basic annotation</h1>
@@ -103,7 +104,7 @@ function AnnotationPage() {
 function WorldPage() {
   return (
     <main>
-      <a className="back-link" href="/">
+      <a className="back-link" href="#/">
         ← Back to examples
       </a>
       <h1>Basic world map</h1>
@@ -138,7 +139,7 @@ function WorldPage() {
 function MarkersPage() {
   return (
     <main>
-      <a className="back-link" href="/">
+      <a className="back-link" href="#/">
         ← Back to examples
       </a>
       <h1>Basic markers</h1>
@@ -185,7 +186,7 @@ function MarkersPage() {
 function GraticulePage() {
   return (
     <main>
-      <a className="back-link" href="/">
+      <a className="back-link" href="#/">
         ← Back to examples
       </a>
       <h1>Europe map with graticule</h1>
@@ -224,21 +225,30 @@ function GraticulePage() {
 }
 
 function App() {
-  const pathname = window.location.pathname;
+  const [route, setRoute] = useState(() => window.location.hash.replace(/^#/, "") || "/");
 
-  if (pathname === "/world") {
+  useEffect(() => {
+    const handleHashChange = () => {
+      setRoute(window.location.hash.replace(/^#/, "") || "/");
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  if (route === "/world") {
     return <WorldPage />;
   }
 
-  if (pathname === "/annotation") {
+  if (route === "/annotation") {
     return <AnnotationPage />;
   }
 
-  if (pathname === "/markers") {
+  if (route === "/markers") {
     return <MarkersPage />;
   }
 
-  if (pathname === "/graticule") {
+  if (route === "/graticule") {
     return <GraticulePage />;
   }
 
