@@ -1,24 +1,53 @@
 import {
+  Annotation,
   ComposableMap,
   Geographies,
   Geography,
-  Marker,
 } from "react-simple-maps";
 
 const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
-const markers = [
-  { name: "New York", coordinates: [-74.006, 40.7128] },
-  { name: "London", coordinates: [-0.1276, 51.5072] },
-  { name: "Tokyo", coordinates: [139.6917, 35.6895] },
+const examples = [
+  {
+    href: "/annotation",
+    title: "Basic annotation",
+    description:
+      "This example shows how to add a basic annotation using the react-simple-maps <Annotation /> component.",
+  },
 ];
 
-function App() {
+function LandingPage() {
   return (
     <main>
-      <h1>react-simple-maps + Vite</h1>
-      <p>This is a minimal docs sample using react-simple-maps in a Vite app.</p>
+      <h1>react-simple-maps docs examples</h1>
+      <p>Explore examples to learn how to build maps and add custom layers.</p>
+      <section className="card-grid" aria-label="Examples">
+        {examples.map((example) => (
+          <a key={example.href} className="card" href={example.href}>
+            <h2>{example.title}</h2>
+            <p>{example.description}</p>
+          </a>
+        ))}
+      </section>
+    </main>
+  );
+}
+
+function AnnotationPage() {
+  return (
+    <main>
+      <a className="back-link" href="/">
+        ← Back to examples
+      </a>
+      <h1>Basic annotation</h1>
+      <p>
+        This example shows how to add a basic annotation using the react-simple-maps
+        {" "}
+        <code>{"<Annotation />"}</code>
+        {" "}
+        component.
+      </p>
       <ComposableMap projectionConfig={{ scale: 140 }}>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -32,17 +61,33 @@ function App() {
             ))
           }
         </Geographies>
-        {markers.map(({ name, coordinates }) => (
-          <Marker key={name} coordinates={coordinates}>
-            <circle r={3} fill="#0070f3" />
-            <text y={-10} textAnchor="middle" className="marker-label">
-              {name}
-            </text>
-          </Marker>
-        ))}
+        <Annotation
+          subject={[-74.006, 40.7128]}
+          dx={30}
+          dy={-30}
+          connectorProps={{
+            stroke: "#4f46e5",
+            strokeWidth: 2,
+            strokeLinecap: "round",
+          }}
+        >
+          <text x="4" fontSize={12} alignmentBaseline="middle" fill="#312e81">
+            New York
+          </text>
+        </Annotation>
       </ComposableMap>
     </main>
   );
+}
+
+function App() {
+  const pathname = window.location.pathname;
+
+  if (pathname === "/annotation") {
+    return <AnnotationPage />;
+  }
+
+  return <LandingPage />;
 }
 
 export default App;
