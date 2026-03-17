@@ -12,10 +12,10 @@
 - Handle `null` and `undefined` explicitly; avoid non-null assertions (`!`)
 - Prefer immutable patterns (`readonly`, spread operators, pure functions)
 - Follow naming conventions:
-  - `PascalCase` for types/interfaces
-  - `camelCase` for variables/functions
-  - `UPPER_SNAKE_CASE` for constants
-  - Boolean prefixes (`is`, `has`, `can`)
+    - `PascalCase` for types/interfaces
+    - `camelCase` for variables/functions
+    - `UPPER_SNAKE_CASE` for constants
+    - Boolean prefixes (`is`, `has`, `can`)
 
 - Structure files by feature, not type
 - Prefer named exports over default exports
@@ -39,6 +39,6 @@
 - Require code reviews to enforce type safety and clarity
 - Reject unsafe assertions and unnecessary `any` usage
 - Maintain a strict `tsconfig` baseline including:
-  - `noUncheckedIndexedAccess`
-  - `exactOptionalPropertyTypes`
-  - `noImplicitOverride`
+    - `noUncheckedIndexedAccess`
+    - `exactOptionalPropertyTypes`
+    - `noImplicitOverride`
