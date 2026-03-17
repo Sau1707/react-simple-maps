@@ -1,4 +1,4 @@
-import { defineConfig, transformWithEsbuild } from 'vite'
+import { defineConfig } from 'vite'
 import { createRequire } from 'node:module'
 
 const require = createRequire(import.meta.url)
@@ -19,21 +19,7 @@ const globals = {
   'prop-types': 'PropTypes',
 }
 
-const transformJsAsJsx = {
-  name: 'transform-js-as-jsx',
-  enforce: 'pre',
-  transform(code, id) {
-    if (!/\/src\/.*\.js$/.test(id)) return null
-
-    return transformWithEsbuild(code, id, {
-      loader: 'jsx',
-      jsx: 'transform',
-    })
-  },
-}
-
 export default defineConfig({
-  plugins: [transformJsAsJsx],
   build: {
     lib: {
       entry: 'src/index.js',
