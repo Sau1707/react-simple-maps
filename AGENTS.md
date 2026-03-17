@@ -1,6 +1,6 @@
 #
 
-# Typescript
+## Typescript
 
 - Enable strict TypeScript settings (`strict`, `noImplicitAny`, `strictNullChecks`)
 - Avoid `any`; prefer `unknown`, generics, or precise types
@@ -42,3 +42,8 @@
     - `noUncheckedIndexedAccess`
     - `exactOptionalPropertyTypes`
     - `noImplicitOverride`
+
+## Before commit
+
+- `npm run format` to ensure consistent code style
+- `npm run build` to ensure code quality and correctness before committing.
