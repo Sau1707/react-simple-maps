@@ -6,6 +6,17 @@ Create beautiful SVG maps in react with d3-geo and topojson using a declarative 
 
 Read the [docs](https://www.react-simple-maps.io/docs/getting-started/), or check out the [examples](https://www.react-simple-maps.io/examples/).
 
+### Build Library
+
+This package now uses Vite in library mode for builds.
+
+```bash
+npm install
+npm run build
+```
+
+Use `npm run watch` to rebuild on file changes.
+
 ### Run Docs Locally
 
 The `docs` folder contains a minimal Vite app for local documentation and usage testing.
