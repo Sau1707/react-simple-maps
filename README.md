@@ -37,7 +37,7 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 // url to a valid topojson file
 const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 const App = () => {
   return (
