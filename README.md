@@ -6,6 +6,18 @@ Create beautiful SVG maps in react with d3-geo and topojson using a declarative 
 
 Read the [docs](https://www.react-simple-maps.io/docs/getting-started/), or check out the [examples](https://www.react-simple-maps.io/examples/).
 
+### Run Docs Locally
+
+The `docs` folder contains a minimal Vite app for local documentation and usage testing.
+
+```bash
+cd docs
+npm install
+npm run dev
+```
+
+Then open the local URL printed by Vite, usually `http://localhost:5173`.
+
 ### Why
 
 `React-simple-maps` aims to make working with svg maps in react easier. It handles tasks such as panning, zooming and simple rendering optimization, and takes advantage of parts of [d3-geo](https://github.com/d3/d3-geo) and topojson-client instead of relying on the entire d3 library.
