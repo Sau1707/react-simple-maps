@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { PatternLines } from "@visx/pattern";
 import {
   Annotation,
   ComposableMap,
@@ -35,6 +36,12 @@ const examples = [
     title: "Europe map with graticule",
     description:
       "This example shows how to use react-simple-maps to make a map of Europe with graticule. It uses the built-in geoAzimuthalEqualArea projection with custom rotation params.",
+  },
+  {
+    href: "#/texture",
+    title: "Mapchart with texture",
+    description:
+      "This map shows how to use react-simple-maps to add textures on the map. This example uses PatternLines from VX to create a line texture.",
   },
 ];
 
@@ -224,6 +231,46 @@ function GraticulePage() {
   );
 }
 
+function TexturePage() {
+  return (
+    <main>
+      <a className="back-link" href="#/">
+        ← Back to examples
+      </a>
+      <h1>Mapchart with texture</h1>
+      <p>
+        This map shows how to use react-simple-maps to add textures on the map.
+        This example uses PatternLines from VX to create a line texture.
+      </p>
+      <ComposableMap projectionConfig={{ scale: 140 }}>
+        <defs>
+          <PatternLines
+            id="texture"
+            height={8}
+            width={8}
+            stroke="#9a8c98"
+            strokeWidth={1}
+            orientation={["diagonal"]}
+          />
+        </defs>
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="url('#texture')"
+                stroke="#4a4e69"
+                strokeWidth={0.4}
+              />
+            ))
+          }
+        </Geographies>
+      </ComposableMap>
+    </main>
+  );
+}
+
 function App() {
   const [route, setRoute] = useState(() => window.location.hash.replace(/^#/, "") || "/");
 
@@ -250,6 +297,10 @@ function App() {
 
   if (route === "/graticule") {
     return <GraticulePage />;
+  }
+
+  if (route === "/texture") {
+    return <TexturePage />;
   }
 
   return <LandingPage />;
