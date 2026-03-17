@@ -3,6 +3,7 @@ import {
   ComposableMap,
   Geographies,
   Geography,
+  Graticule,
   Marker,
 } from "react-simple-maps";
 
@@ -27,6 +28,12 @@ const examples = [
     title: "Basic markers",
     description:
       "This example shows how to add basic markers to a map. To see an example of how to add custom SVG markers, see the custom markers example.",
+  },
+  {
+    href: "/graticule",
+    title: "Europe map with graticule",
+    description:
+      "This example shows how to use react-simple-maps to make a map of Europe with graticule. It uses the built-in geoAzimuthalEqualArea projection with custom rotation params.",
   },
 ];
 
@@ -175,6 +182,47 @@ function MarkersPage() {
   );
 }
 
+function GraticulePage() {
+  return (
+    <main>
+      <a className="back-link" href="/">
+        ← Back to examples
+      </a>
+      <h1>Europe map with graticule</h1>
+      <p>
+        This example shows how to use react-simple-maps to make a map of Europe with
+        graticule. It uses the built-in
+        {" "}
+        <code>geoAzimuthalEqualArea</code>
+        {" "}
+        projection with custom rotation params.
+      </p>
+      <ComposableMap
+        projection="geoAzimuthalEqualArea"
+        projectionConfig={{
+          rotate: [-10.0, -53.0, 0],
+          center: [0, 52],
+          scale: 1100,
+        }}
+      >
+        <Graticule stroke="#e4e4e7" />
+        <Geographies geography="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json">
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="#f5f4f6"
+                stroke="#d6d6da"
+              />
+            ))
+          }
+        </Geographies>
+      </ComposableMap>
+    </main>
+  );
+}
+
 function App() {
   const pathname = window.location.pathname;
 
@@ -188,6 +236,10 @@ function App() {
 
   if (pathname === "/markers") {
     return <MarkersPage />;
+  }
+
+  if (pathname === "/graticule") {
+    return <GraticulePage />;
   }
 
   return <LandingPage />;
