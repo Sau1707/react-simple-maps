@@ -1,8 +1,6 @@
+import test from "node:test"
+import assert from "node:assert/strict"
 
-import expect from "expect"
-
-describe("sampleTest", () => {
-  it("should exist", () => {
-    expect(true).toEqual(true)
-  })
+test("sampleTest", () => {
+  assert.equal(true, true)
 })
