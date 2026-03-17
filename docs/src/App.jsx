@@ -11,6 +11,12 @@ const geoUrl =
 
 const examples = [
   {
+    href: "/world",
+    title: "Basic world map",
+    description:
+      "This example illustrates the easiest way to display a world map based on a custom topojson file. You can replace the map file with any valid topojson file.",
+  },
+  {
     href: "/annotation",
     title: "Basic annotation",
     description:
@@ -87,6 +93,41 @@ function AnnotationPage() {
   );
 }
 
+function WorldPage() {
+  return (
+    <main>
+      <a className="back-link" href="/">
+        ← Back to examples
+      </a>
+      <h1>Basic world map</h1>
+      <p>
+        This example illustrates the easiest way to display a world map based on a custom
+        topojson file. You can replace the map file with any valid topojson file.
+      </p>
+      <p>
+        Since this example focuses on the simplest possible version of a world map it omits
+        the implementation of zooming and panning. If you are interested in the ZoomableGroup
+        component and in adding zooming and panning capabilities to your map, check out the
+        zoom-pan example.
+      </p>
+      <ComposableMap projectionConfig={{ scale: 140 }}>
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="#f5f4f6"
+                stroke="#d6d6da"
+              />
+            ))
+          }
+        </Geographies>
+      </ComposableMap>
+    </main>
+  );
+}
+
 function MarkersPage() {
   return (
     <main>
@@ -136,6 +177,10 @@ function MarkersPage() {
 
 function App() {
   const pathname = window.location.pathname;
+
+  if (pathname === "/world") {
+    return <WorldPage />;
+  }
 
   if (pathname === "/annotation") {
     return <AnnotationPage />;
