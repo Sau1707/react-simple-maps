@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Unreleased
+
+- Added support for React 19
+
 ## v3.0.0 2022-07-25
 
 - Added `forwardRef` to mapping components
